@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ku3i5*pz!+a68l_!tag^%^te%lit2^niry9-_=1(4atf^sp-ec'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['yaroslav33.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -84,13 +84,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'yarl_django',
-        #'USER': 'yarl_django',
-        #'PASSWORD': 'y$06162040',
-        #'HOST': 'localhost',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'yarl_django',
+        'USER': 'yarl_django',
+        'PASSWORD': 'y$06162040',
+        'HOST': 'localhost',
     }
 }
 
@@ -235,3 +235,22 @@ CACHES = {
 }
 
 MPTT_ADMIN_LEVEL_INDENT = 20
+
+if os.getcwd() == '/home':
+    import dj_database_url
+
+    DATABASES = {
+        'default': dj_database_url.config(default='mysql://localhost')
+    }
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    ALLOWED_HOSTS = ['*']
+
+    DEBUG = False
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
