@@ -84,13 +84,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'yarl_django',
-        #'USER': 'yarl_django',
-        #'PASSWORD': 'y$06162040',
-        #'HOST': 'localhost',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'yarl_django',
+        'USER': 'yarl_django',
+        'PASSWORD': 'y$06162040',
+        'HOST': 'localhost',
     }
 }
 
@@ -236,18 +236,18 @@ CACHES = {
 
 MPTT_ADMIN_LEVEL_INDENT = 20
 
-if os.getcwd() == '/app':
+if os.getcwd() == '/home':
     import dj_database_url
 
     DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
+        'default': dj_database_url.config(default='mysql://localhost')
     }
 
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['testsite.herokuapp.com']
+    ALLOWED_HOSTS = ['*']
 
-    #DEBUG = False
+    DEBUG = False
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
